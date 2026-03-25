@@ -51,7 +51,7 @@ The sidebar is always visible and contains:
 
 **Bottom section:**
 - Forms
-- User avatar and name (e.g., "Joy Grendual")
+- User avatar and name
 - Help icon (?)
 
 Click any sidebar item to navigate to that section. The active section is highlighted.

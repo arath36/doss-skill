@@ -77,8 +77,8 @@ Each order can have one or more shipments. Shipments track the physical movement
 
 ### Key Shipment Fields
 
-- **Internal Ref #** — Warehouse reference (format varies: "LAX1-106376", "SAT1-106289", "MEZ-14-26-FLON")
-- **Tracking Link** — External URL for carrier tracking (Estes Express, ShipBob, etc.)
+- **Internal Ref #** — Warehouse reference number (format varies by warehouse)
+- **Tracking Link** — External URL for carrier tracking
 - **Ship Date** — When the shipment left the warehouse
 - **Issue Date** — When the shipment record was created
 
@@ -96,7 +96,7 @@ Order shipped → Invoice record created (status: "Ready to Invoice") → Invoic
 
 | View | What it shows |
 |---|---|
-| **Ready to Invoice [SPS]** | Orders fulfilled via SPS-connected retailers (UNFI, etc.) needing invoicing |
+| **Ready to Invoice [SPS]** | Orders fulfilled via SPS-connected retailers needing invoicing |
 | **Ready to Invoice [Non-S...]** | Non-SPS orders needing invoicing |
 | **Invoiced** | All completed invoices |
 | **Invoiced this Month** | Invoices generated in the current month |
@@ -114,14 +114,14 @@ Doss uses a two-level customer hierarchy:
 
 ### Parent Customers → Customers (Locations)
 
-- **Parent Customer** = the company (e.g., "Imperfect Foods", "Jack's Stir Brew Coffee")
-- **Customer** = a specific ship-to location (e.g., "Imperfect Foods CHI", "Jack's Stir Brew Coffee - 200 Park Ave")
+- **Parent Customer** = the company
+- **Customer** = a specific ship-to location under that company
 
 ### Customer Types
 
 The Customers table isn't just for sales customers. It also stores:
 - **Sales Customer** — Ship-to locations for orders
-- **Warehouse** — Fulfillment centers (D2, ShipBob, etc.)
+- **Warehouse** — Fulfillment centers
 - **Freight Broker** — Logistics partners
 - **Supplier** — Vendors/suppliers
 
@@ -153,39 +153,21 @@ Sample created → Approve Order (checkbox) → Processing → Shipped → Deliv
 
 ### Sample Views
 
-Monthly views (June 2025 through February 2026) let you see samples by time period. Status views (On Hold, Processing, Ready to Submit Order, Shipped, Delivered, Delivery Issues) show current state.
+Monthly views let you see samples by time period. Status views (On Hold, Processing, Ready to Submit Order, Shipped, Delivered, Delivery Issues) show current state.
 
 ---
 
 ## Product Catalog Lookups
 
-### SKU Naming Convention
+### Finding Products
 
-Products follow this naming pattern: `Bar-{flavor}-{pack}ea/{case}cs`
-
-| Code | Product |
-|---|---|
-| MV | Mixed Variety |
-| PB | Peanut Butter |
-| PC | Peanut Chocolate |
-| HC | Hot Chocolate |
-| AB | Almond Butter |
-| MB | Maple Blueberry |
-| HZ | Hazelnut |
-
-Pack sizes: 4ea (4-pack), 12ea (12-pack)
-Case sizes: 6cs (6 per case), 8cs (8 per case)
-
-Example: `Bar-MV-12ea/8cs` = Mixed Variety, 12-pack bars, 8 packs per case (master case).
-
-### Product Types
-
-Views in the Product Catalog help filter by type:
-- **Master Cases (12 Pack)** — Standard 12-bar retail packs
-- **Master Cases (4 Pack)** — Smaller 4-bar packs
+Go to Product Catalog and use the saved views to filter by type:
+- **Master Cases (12 Pack)** — Standard 12-unit retail packs
+- **Master Cases (4 Pack)** — Smaller 4-unit packs
 - **Caddies** — Display units
 - **Pallets** — Pallet-level SKUs
 - **Sample Products (SWAG...)** — Sample/promotional items
+- **Active** — All currently active products
 
 ### Finding UPC/GTIN Codes
 
@@ -227,4 +209,4 @@ Go to Customers → click **"Warehouses"** view.
 
 ### "What samples went out recently?"
 
-Go to Samples → click the most recent month view (e.g., "February 2026") or use "Shipped" view.
+Go to Samples → click the most recent monthly view or use "Shipped" view.

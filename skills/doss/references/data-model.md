@@ -23,9 +23,9 @@ The central entity is **Orders**. Most other tables link back to an order via PO
 The primary table. Each record is a purchase order from a customer.
 
 **Key fields:**
-- **PO** — Purchase order number (e.g., "50228549"). The primary identifier.
-- **Status Overview LINK** — Formatted string: `PO {number} / {warehouse} / {customer}` (e.g., "PO 50228549 / D2 / Foodcase International"). Links to the Status Overview Hub.
-- **Fulfillment Warehouse** — Dropdown. Values include "D2", "ShipBob", and others. Indicates which warehouse fulfills the order.
+- **PO** — Purchase order number. The primary identifier.
+- **Status Overview LINK** — Formatted string: `PO {number} / {warehouse} / {customer}`. Links to the Status Overview Hub.
+- **Fulfillment Warehouse** — Dropdown. Indicates which warehouse fulfills the order.
 - **Total Sales Amount** — Formula field (currency). Calculated from line items.
 - **Due Date [From Status Overview]** — Lookup field. The order's due/delivery date.
 - **Due Date** — Date field.
@@ -35,7 +35,7 @@ The primary table. Each record is a purchase order from a customer.
 - **Overview Status** — Lookup field. Values: "Wait to Ship Next Month", "ON HOLD", "Kitting Needed", "Pending Ack", "Pending Submission", "Sent For Quotes", "Processing", "Shipped/Picked Up", "Delivered", "Closed".
 - **Order Date** — Date field.
 - **Order Link** — Text/URL field.
-- **Customer Name** — Linked record to Customers table (e.g., "Foodcase International B.V.").
+- **Customer Name** — Linked record to Customers table.
 - **Sales Channel** — Text field.
 - **Order Total** — Formula field (currency).
 - **Discount Code** — Text field.
@@ -50,7 +50,7 @@ The primary table. Each record is a purchase order from a customer.
 - **Shipments** tab — Links to related shipment records
 
 **Saved views:**
-All Records, Wait to Ship Next Month, ON HOLD, Kitting Needed, Pending Ack, Pending Submission for..., Sent For Quotes, Processing, Shipped/Picked Up, Delivered, Closed, Open Orders, Filtered View (DO NOT T...), Frosted Strawberry Ord..., View (15)
+All Records, Wait to Ship Next Month, ON HOLD, Kitting Needed, Pending Ack, Pending Submission for..., Sent For Quotes, Processing, Shipped/Picked Up, Delivered, Closed, Open Orders, and others.
 
 ---
 
@@ -61,7 +61,7 @@ Tracks freight quote requests. Each record corresponds to an order that needs a 
 **Key fields:**
 - **Status Overview Link** — Formatted PO string (same pattern as Orders).
 - **Quote Status** — Text/tag field. Values: "requested", "accepted".
-- **Requested Ship Date ** [Complete before Request]** — Date field.
+- **Requested Ship Date [Complete before Request]** — Date field.
 - **Request Quotes ? (Did you fill out Request)** — Checkbox.
 
 **Saved views:**
@@ -75,11 +75,11 @@ Tracks physical shipments. Multiple shipments can exist per order.
 
 **Key fields:**
 - **Status Overview Link** — Formatted PO string.
-- **Internal Ref #** — Text field (e.g., "LAX1-106376", "SAT1-106289"). Warehouse-specific reference.
+- **Internal Ref #** — Text field. Warehouse-specific reference number.
 - **Ship Date** — Date field.
 - **Linked PO** — Linked record to Orders (by PO number).
 - **Order ID** — Numeric field.
-- **Order URL** — URL field (some link to external systems like web.shipbob.com).
+- **Order URL** — URL field (some link to external fulfillment systems).
 - **Overview Status** — Text field. Values: "Processing", "Shipped / Picked Up", "Delivered", "Received", "Closed".
 - **Issue Date** — Date field.
 - **Due Date** — Date field.
@@ -99,7 +99,7 @@ Tracks invoices generated from shipped orders.
 
 **Key fields:**
 - **Status Overview Link** — Formatted PO string.
-- **Invoice #** — Text field (e.g., "10001779287", "MEZ-14-26-FLON").
+- **Invoice #** — Text field.
 - **Invoice / BOL Date** — Date field.
 - **Linked PO** — Text field (PO number).
 - **Invoice Amount ($)** — Currency field.
@@ -116,8 +116,8 @@ All Records, Ready to Invoice [SPS], Ready to Invoice [Non-S...], Invoiced, Invo
 Ship-to locations. This table contains not just sales customers but also warehouses, freight brokers, and suppliers — differentiated by the "Location Type" field.
 
 **Key fields:**
-- **Location Name** — Text field. The specific location name (e.g., "Imperfect Foods CHI", "Jack's Stir Brew Coffee - 200 Park").
-- **Parent Account** — Linked record to Parent Customers (e.g., "Imperfect Foods", "Jack's Stir Brew Coffee").
+- **Location Name** — Text field. The specific location name.
+- **Parent Account** — Linked record to Parent Customers.
 - **Location Type** — Text field. Values: "Sales Customer", "Warehouse", "Freight Broker", "Supplier".
 - **Status** — Text field. Values: "Active", "Inactive".
 - **Shipping Address** — Text field (full address).
@@ -134,7 +134,7 @@ All Records, Active Sales Customers, Warehouses, Freight Brokers, Suppliers
 Tracks sample orders, typically fulfilled through ShipBob.
 
 **Key fields:**
-- **PO / Order ID / DC** — Text field (e.g., "SAMPLE-589 / 302343535 / Attn. Rodrigo Zuloaga").
+- **PO / Order ID / DC** — Text field. Composite identifier for the sample order.
 - **Approve Order** — Checkbox.
 - **Fulfillment Warehouse** — Text field. Typically "ShipBob".
 - **Order ID** — Numeric field.
@@ -142,7 +142,7 @@ Tracks sample orders, typically fulfilled through ShipBob.
 - **Shipping Speed Class** — Text field. Values: "Expedited (2-4 days)", "Standard (Ground)".
 
 **Saved views:**
-All Samples Orders, On Hold, Processing, Ready to Submit Order, Shipped, Delivered, Delivery Issues, plus monthly views (June 2025 through February 2026)
+All Samples Orders, On Hold, Processing, Ready to Submit Order, Shipped, Delivered, Delivery Issues, plus monthly views by month/year.
 
 ---
 
@@ -151,17 +151,15 @@ All Samples Orders, On Hold, Processing, Ready to Submit Order, Shipped, Deliver
 The SKU master table. Contains all products and their identifiers across different retail partners.
 
 **Key fields:**
-- **Vendor Item #** — Text field. The primary SKU identifier (e.g., "Bar-MV-12ea/8cs", "Bar-PB-4ea/6cs").
+- **Vendor Item #** — Text field. The primary SKU identifier.
 - **Status** — Text field. Values: "Active", "Inactive".
-- **Type** — Text field. Values: "Master" (and likely others).
-- **[SPS UNFI/Costco] Product Label** — Text field. SKU label for UNFI/Costco (e.g., "BAR-MV-12E").
-- **[SPS SuperValue] UPC/GTIN** — Text field. UPC code (e.g., "085004658215").
-- **[SPS KeHE/Target/Costco] ConsumerPackage** — Text field. Another barcode format.
+- **Type** — Text field. Values: "Master" (and others).
+- **[SPS UNFI/Costco] Product Label** — Text field. SKU label for UNFI/Costco.
+- **[SPS SuperValue] UPC/GTIN** — Text field. UPC code.
+- **[SPS KeHE/Target/Costco] ConsumerPackage** — Text field. Consumer-facing barcode.
 
 **Saved views:**
 All Records, Active, Caddies, Master Cases (12 Pack), Master Cases (4 Pack), Sample Products (SWAG...), Pallets
-
-**SKU naming convention:** `Bar-{flavor code}-{pack size}/{case size}`. Flavor codes observed: MV (Mixed Variety), PB (Peanut Butter), PC (Peanut Chocolate?), HC (Hot Chocolate), AB, MB (Maple Blueberry), HZ (Hazelnut).
 
 ---
 
@@ -170,12 +168,12 @@ All Records, Active, Caddies, Master Cases (12 Pack), Master Cases (4 Pack), Sam
 Parent accounts that own one or more customer locations.
 
 **Key fields:**
-- **Linked Account** — Text field. The parent company name (e.g., "5 Squares Inc.", "Amazon", "Imperfect Foods").
+- **Linked Account** — Text field. The parent company name.
 - **Type** — Text field. Values: "Wholesale", "Warehouse", "Amazon".
 - **Default Payment Terms** — Text field. Values: "NET30".
 - **Freight Terms** — Text field.
 - **Linked Locations** — Linked records to Customers table.
-- **Payment Terms Days** — Formula field (numeric, e.g., 30, 0).
+- **Payment Terms Days** — Formula field (numeric).
 
 **Saved views:**
 All Records
@@ -186,8 +184,8 @@ All Records
 
 Not a standalone table — it's a dashboard page that embeds filtered views from other tables. The Home page at `app.doss.com/` shows:
 
-1. **Status Overview Hub** — A view of shipments/orders filtered by "UNDER MOQ (ON HOLD)" with columns: PO/Order ID/DC, Delivery Date, Due Date, Overview Status, Linked PO #, Tracking Link, Tracking #, # of Shipments, Fulfillment columns.
+1. **Status Overview Hub** — A view of shipments/orders filtered by status (e.g., "UNDER MOQ (ON HOLD)") with columns: PO/Order ID/DC, Delivery Date, Due Date, Overview Status, Linked PO #, Tracking Link, Tracking #, # of Shipments, Fulfillment columns.
 
-2. **Orders** — An embedded view of the Orders table with a dropdown filter for status (e.g., "ON HOLD").
+2. **Orders** — An embedded view of the Orders table with a dropdown filter for status.
 
 Both sections have their own sort, filter, and search controls.

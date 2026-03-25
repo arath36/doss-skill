@@ -17,17 +17,17 @@ You need browser access to use Doss. Use the Claude-in-Chrome MCP tools (`mcp__C
 
 Doss has 9 data tables accessible from the left sidebar, plus utility features:
 
-| Section | What it tracks | Record count (approx) |
-|---|---|---|
-| **Status Overview Hub** | Dashboard combining shipment and order views with filters | — |
-| **Orders** | Purchase orders from customers | ~2900 |
-| **Freight Quoting Center** | Freight quote requests tied to orders | ~700 |
-| **Shipments** | Physical shipments against orders | varies |
-| **Invoices** | Invoices generated from shipped orders | ~2600 |
-| **Customers** | Ship-to locations (also includes warehouses, freight brokers, suppliers) | ~285 |
-| **Samples** | Sample orders (typically via ShipBob) | ~170 |
-| **Product Catalog** | SKU master data (bars, cases, caddies, pallets) | ~85 |
-| **Parent Customers** | Parent accounts that own multiple customer locations | ~96 |
+| Section | What it tracks |
+|---|---|
+| **Status Overview Hub** | Dashboard combining shipment and order views with filters |
+| **Orders** | Purchase orders from customers |
+| **Freight Quoting Center** | Freight quote requests tied to orders |
+| **Shipments** | Physical shipments against orders |
+| **Invoices** | Invoices generated from shipped orders |
+| **Customers** | Ship-to locations (also includes warehouses, freight brokers, suppliers) |
+| **Samples** | Sample orders (typically via ShipBob) |
+| **Product Catalog** | SKU master data (cases, caddies, pallets) |
+| **Parent Customers** | Parent accounts that own multiple customer locations |
 
 Additional features:
 - **Dossbot** (`/dossbot/chat`) — Built-in AI chat assistant
@@ -56,4 +56,4 @@ Read the reference files based on what you need:
 
 **Check invoice status**: Go to Invoices > use views like "Ready to Invoice [SPS]", "Invoiced", or "Invoiced this Month".
 
-**Find product info**: Go to Product Catalog > search by Vendor Item # (e.g., "Bar-MV-12ea/8cs").
+**Find product info**: Go to Product Catalog > search by Vendor Item #.
